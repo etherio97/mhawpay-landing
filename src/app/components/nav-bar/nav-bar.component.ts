@@ -39,7 +39,10 @@ export class NavBarComponent {
   private setTitle() {
     let title = document.querySelector("title");
     if (title) {
-      title.innerText = this.lang == "မြန်မာ" ? "မှော်ပေး" : "Mhaw Pay";
+      let localLang =
+        localStorage.getItem("locale") || this.translateService.getActiveLang();
+      title.innerText =
+        localLang.toLocaleLowerCase() == "mm" ? "မှော်ပေး" : "Mhaw Pay";
     }
   }
 
