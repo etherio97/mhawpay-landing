@@ -1,23 +1,46 @@
 <mat-toolbar>
-  <div class="container mx-auto">
+  <div class="container mx-auto text-gray-600">
     <div class="flex justify-between">
-      <div class="mt-3">
-        <a class="text-xl font-black tracking-wide" routerLink="/">
+      <div class="py-2 flex items-center">
+        <div class="md:hidden">
+          <button mat-icon-button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 mx-auto"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <a
+          class="text-xl font-black tracking-wide pb-1 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-700"
+          routerLink="/"
+        >
           {{'MHAW_PAY' | transloco}}
         </a>
       </div>
 
-      <div class="flex">
-        <div *ngFor="let item of items">
-          <a
-            mat-button
-            [routerLink]="item.path"
-            [routerLinkActiveOptions]="{exact: true}"
-            routerLinkActive="font-semibold"
-          >
-            {{item.title | transloco}}
-          </a>
+      <div class="flex py-2">
+        <div class="hidden md:flex">
+          <div *ngFor="let item of items">
+            <a
+              mat-button
+              [routerLink]="item.path"
+              [routerLinkActiveOptions]="{exact: true}"
+              routerLinkActive="font-semibold"
+            >
+              {{item.title | transloco}}
+            </a>
+          </div>
         </div>
+
         <button mat-icon-button [matMenuTriggerFor]="menu">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -34,6 +57,7 @@
             />
           </svg>
         </button>
+
         <mat-menu #menu="matMenu" xPosition="before">
           <button mat-menu-item (click)="changeLang()">
             {{lang}}

@@ -27,20 +27,21 @@ export class NavBarComponent {
   }
 
   private getLocale() {
-    let localLang = localStorage.getItem("locale");
+    let localLang = sessionStorage.getItem("locale");
     localLang && this.setLocale(localLang);
   }
 
   private setLocale(lang = "") {
     this.translateService.setActiveLang(lang.toLocaleLowerCase());
-    localStorage.setItem("locale", lang.toLocaleUpperCase());
+    sessionStorage.setItem("locale", lang.toLocaleUpperCase());
   }
 
   private setTitle() {
     let title = document.querySelector("title");
     if (title) {
       let localLang =
-        localStorage.getItem("locale") || this.translateService.getActiveLang();
+        sessionStorage.getItem("locale") ||
+        this.translateService.getActiveLang();
       title.innerText =
         localLang.toLocaleLowerCase() == "mm" ? "မှော်ပေး" : "Mhaw Pay";
     }

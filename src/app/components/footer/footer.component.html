@@ -1,12 +1,10 @@
-<div class="bg-gray-700 text-gray-100 p-4">
+<div class="bg-gray-700 text-gray-400 p-4">
   <div class="container mx-auto">
-    <div class="mx-5 flex justify-between text-sm">
-      <div>
-        <p>
-          &copy; {{YEAR}} {{'MHAW_PAY'|transloco}}
-        </p>
+    <div class="mx-5 flex flex-col-reverse md:flex-row justify-between text-sm">
+      <div class="pt-3 pb-4">
+        &copy; {{YEAR}} {{'MHAW_PAY'|transloco}}
       </div>
-      <div class="space-x-2 text-gray-400">
+      <div class="pt-3 pb-4space-x-2 text-gray-300">
         <a
           class="transition hover:text-gray-50"
           routerLink="/terms-and-conditions"
