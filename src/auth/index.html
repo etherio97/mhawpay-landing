@@ -36,7 +36,9 @@
           location.href = url.toString();
         }
 
-        function reject(err) {}
+        function reject(err) {
+          alert("Error")
+        }
 
         // Firebase Auth
         firebase.auth().onAuthStateChanged((user) => {
@@ -44,14 +46,14 @@
             return resolve(user);
           }
           if (!inAppBrowser) {
-            return;
+            return reject(new Error());
           }
-          //   firebase
-          //     .auth()
-          //     .signInAnonymously()
-          //     .then((user) => {
-          //       location.href = "/";
-          //     });
+          firebase
+             .auth()
+             .signInAnonymously()
+             .then((user) => {
+               alert("You are logged in as anonymous");
+             });
         });
       })();
     </script>
