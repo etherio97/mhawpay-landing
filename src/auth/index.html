@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MhawPay</title>
+    <script src="https://mhawpay.firebaseapp.com/__/firebase/8.2.2/firebase-app.js"></script>
+    <script src="https://mhawpay.firebaseapp.com/__/firebase/8.2.2/firebase-auth.js"></script>
+    <script src="https://mhawpay.firebaseapp.com/__/firebase/init.js"></script>
+  </head>
+  <body>
+    <script>
+      !(function () {
+        var params = new URLSearchParams(location.search);
+        var inAppBrowser = navigator.userAgent.match(/\[FBAN\/.*\]/);
+        var redirectUrl = params.has("redirectUrl")
+          ? params.get("redirectUrl")
+          : "https://mhawpay.web.app";
+
+        function resolve(user) {
+          var url = new URL(redirectUrl);
+          user = user.toJSON();
+          url.searchParams.append(
+            "accessToken",
+            user.stsTokenManager.accessToken
+          );
+          url.searchParams.append(
+            "refreshToken",
+            user.stsTokenManager.refreshToken
+          );
+          url.searchParams.append(
+            "expirationTime",
+            user.stsTokenManager.expirationTime
+          );
+          location.href = url.toString();
+        }
+
+        function reject(err) {}
+
+        // Firebase Auth
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            return resolve(user);
+          }
+          if (!inAppBrowser) {
+            return;
+          }
+          //   firebase
+          //     .auth()
+          //     .signInAnonymously()
+          //     .then((user) => {
+          //       location.href = "/";
+          //     });
+        });
+      })();
+    </script>
+  </body>
+</html>
